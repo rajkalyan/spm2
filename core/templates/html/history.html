@@ -1,0 +1,49 @@
+{% extends 'html/base.html' %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+<script>
+    function multiply(a,b){
+        return a*b
+    }
+
+</script>
+<div class="container" style="margin-top: 100px;">
+    {% if messages %}
+    {% for m in messages %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{m}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if x == Null %}
+    <p>History is Empty</p>
+
+    {% else %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in x %}
+          <tr>
+
+            <td>{{i.pname}}</td>
+            <td>{{i.quant}}</td>
+            <td>{{i.pcost}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

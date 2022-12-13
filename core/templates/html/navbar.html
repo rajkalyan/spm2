@@ -1,0 +1,94 @@
+{% load static %}
+<nav style="background:linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(9,17,121,1) 10%, rgba(0,215,255,1) 100%);" class="navbar fixed-top navbar-expand-md navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="{% url 'index' %}">
+      <img src="{% static 'img\Images\Cargo_Vault-logos.jpeg' %}" alt="Logo" height="50" width="50">
+    </a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav my-1 ml-auto">
+        {% if not user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'ap' %}">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'ab' %}">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'ct' %}">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tc' %}">Terms and Conditions</a>
+          </li>
+        {% elif user.role == 2 %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pr' %}">Add Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">History</a>
+
+        </li>
+        {% elif user.role == 3 %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ap' %}">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ab' %}">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ct' %}">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tc' %}">Terms and Conditions</a>
+        </li>
+        {% elif user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'gvpm' %}">Permissions</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'roleRequest' %}">Role Request</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ab' %}">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ab' %}">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tc' %}">Terms and Conditions</a>
+        </li>
+        {% endif %}
+      </ul>
+      <ul class="navbar-nav my-1 ml-auto" style="margin-right: 120px;">
+        {% if not user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Registration</a>
+        </li>
+        {% else %}
+        <div class="dropdown">
+            <li  class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <img src="{{user.uimg.url}}" alt="logo" height="32" width="40" class="rounded-circle">
+            </li>
+            <div class="dropdown-menu">
+              {% if user.role == 3 %}
+              <a class="dropdown-item" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a>
+              {% endif %}
+              <a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a>
+              <a class="dropdown-item" href="{% url 'changePassword' %}"><i class="fas fa-key"></i> Change Password</a>
+              <a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </div>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>

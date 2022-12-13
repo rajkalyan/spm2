@@ -1,0 +1,122 @@
+{% extends 'html/base.html' %}
+{% block title %}Products{% endblock %}
+{% block content %}
+<script>
+    function wcqib_refresh_quantity_increments() {
+    jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {
+        var c = jQuery(b);
+        c.addClass("buttons_added"), c.children().first().before('<input type="button" value="-" class="minus" />'), c.children().last().after('<input type="button" value="+" class="plus" />')
+    })
+}
+String.prototype.getDecimals || (String.prototype.getDecimals = function() {
+    var a = this,
+        b = ("" + a).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+    return b ? Math.max(0, (b[1] ? b[1].length : 0) - (b[2] ? +b[2] : 0)) : 0
+}), jQuery(document).ready(function() {
+    wcqib_refresh_quantity_increments()
+}), jQuery(document).on("updated_wc_div", function() {
+    wcqib_refresh_quantity_increments()
+}), jQuery(document).on("click", ".plus, .minus", function() {
+    var a = jQuery(this).closest(".quantity").find(".qty"),
+        b = parseFloat(a.val()),
+        c = parseFloat(a.attr("max")),
+        d = parseFloat(a.attr("min")),
+        e = a.attr("step");
+    b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
+});
+</script>
+<style>
+    .quantity {
+ display: inline-block; }
+
+.quantity .input-text.qty {
+ width: 35px;
+ height: 39px;
+ padding: 0 5px;
+ text-align: center;
+ background-color: transparent;
+ border: 1px solid #efefef;
+}
+
+.quantity.buttons_added {
+ text-align: left;
+ position: relative;
+ white-space: nowrap;
+ vertical-align: top; }
+
+.quantity.buttons_added input {
+ display: inline-block;
+ margin: 0;
+ vertical-align: top;
+ box-shadow: none;
+}
+
+.quantity.buttons_added .minus,
+.quantity.buttons_added .plus {
+ padding: 7px 10px 8px;
+ height: 41px;
+ background-color: #ffffff;
+ border: 1px solid #efefef;
+ cursor:pointer;}
+
+.quantity.buttons_added .minus {
+ border-right: 0; }
+
+.quantity.buttons_added .plus {
+ border-left: 0; }
+
+.quantity.buttons_added .minus:hover,
+.quantity.buttons_added .plus:hover {
+ background: #eeeeee; }
+
+.quantity input::-webkit-outer-spin-button,
+.quantity input::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ margin: 0; }
+ 
+ .quantity.buttons_added .minus:focus,
+.quantity.buttons_added .plus:focus {
+ outline: none; }
+</style>
+<div class="container" style="margin-top: 100px;">
+    <div class="row">
+        {% for i in x %}
+        
+        <div class="col col-md-4">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="card shawdow-lg my-2">
+              <img src="{{i.pimg.url}}" alt="name" class="card-img-top" height="250">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5><span class="text text-info">{{i.pname}}</h5>
+                    <input type="text" name="pname" value="{{i.pname}}" hidden="True">
+                    <input type="number" name="id" value="{{i.id}}" hidden="True">
+                    <input type="number" name="pno" value="{{i.pno}}" hidden="True">
+                    <h6>Cost: ₹<span class="text text-primary">{{i.pcost}}</span></h6>
+                    <input type="number" name="pcost" value="{{i.pcost}}" hidden="True">
+                  </div>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="row">
+                    <div class="quantity buttons_added">
+                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                    </div>
+                </div>
+                <div class="row">
+                    <a href="{% url 'vp' i.id %}" class="btn btn-outline-warning mx-auto my-2">View Details</a>
+                    
+                    <input type="submit" value="Add to cart" class="btn btn-outline-success form-control my-2">
+                </div>
+                {% endif %}
+              </div>
+            </div> 
+        </form>
+          </div>
+        {% endfor %}
+    
+    </div>
+</div>
+{% endblock %}

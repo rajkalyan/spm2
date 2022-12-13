@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cargo Valut</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<style type="text/css">
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#footer {
+    background: #007b5e !important;
+}
+#footer h5{
+	padding-left: 10px;
+    border-left: 3px solid #eeeeee;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color:#ffffff;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#footer ul.social li{
+	padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+#footer ul.social li a,
+#footer ul.quick-links li a{
+	color:#ffffff;
+}
+#footer ul.social li a:hover{
+	color:#eeeeee;
+}
+#footer ul.quick-links li{
+	padding: 3px 0;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+@media (max-width:767px){
+	#footer h5 {
+    padding-left: 0;
+    border-left: transparent;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+}
+*
+{
+margin: 0;
+padding: 0;
+font-family: arial;
+overflow: hidden;
+}
+.container-fluid
+{
+width: 100%;
+height: 100vh;
+background: linear-gradient(to left, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(https://images-ext-2.discordapp.net/external/RQlu5PiuQkX1OPR9sm_ieLHWujPFVvg0nn8re7WhVZo/https/webappick.com/wp-content/uploads/2017/02/e-commerce-business.jpg?width=1440&height=600);
+background-size: cover;
+background-repeat: no-repeat;
+}
+.container
+{
+width: 1200px;
+height: 80px;
+margin: auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.container ion-icon
+{
+font-size: 50px;
+color: #f5f5f5;
+cursor: pointer;
+transition: 0.5s;
+}
+.container ion-icon:hover
+{
+color: #e33;
+}
+.container .btn
+{
+width: 170px;
+height: 45px;
+border-radius: 25px;
+background-color: #e33;
+color: #fff;
+border: 2px solid #e33;
+cursor: pointer;
+font-weight: bold;
+transition: 0.5s;
+}
+.container .btn:hover
+{
+background-color: transparent;
+color: #e33;
+}
+.content
+{
+width: 1200px;
+height: 100vh;
+text-align: center;
+margin: auto;
+}
+.content h1
+{
+color: #fff;
+font-size: 70px;
+padding-top: 150px;
+}
+.content h2
+{
+color: #fff;
+padding-top: 20px;
+font-size: 35px;
+font-weight: 400;
+}
+.content h3
+{
+color: #fff;
+padding-top: 20px;
+font-weight: 400;
+}
+.content .btn
+{
+width: 170px;
+height: 45px;
+border-radius: 25px;
+background-color: #e33;
+color: #fff;
+border: 2px solid #e33;
+cursor: pointer;
+font-weight: bold;
+transition: 0.5s;
+margin-top: 30px;
+}
+.content .btn:hover
+{
+background-color: transparent;
+color: #e33;
+}
+</style>
+<body>
+{% include 'html/navbar.html' %}
+{% block content %}
+{% endblock %}
+<div class="container-fluid">
+<div class="container">
+<ion-icon name="menu"></ion-icon>
+<button class="btn">BUY EZONE</button>
+</div>
+<div class="content">
+<h1></h1>
+<h2>Welcome to Cargo Valut</h2>
+<h3>A perfect place for to buy the products</h3>
+<a href="{% url 'ap' %}">
+<button class="btn">VIEW PRODUCTS</button>
+</a>
+</div>
+</div>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+{% extends 'html/base.html' %}
+{% block title %}View Product{% endblock %}
+{% block content %}
+<div class="container" style="margin-top:100px;">
+    <div class="row mt-4">
+        <div class="card col-md-4 mx-auto shawdow-lg" style="background: linear-gradient(90deg, rgba(236,207,127,1) 35%, rgba(236,237,5,1) 100%);">
+            <h3>Product Picture</h3>
+            <img src="{{x.pimg.url}}" alt="Room Pic" height="320" width="350">
+        </div>
+        <div class="card col-md-4 mx-auto shawdow-lg" style="background: linear-gradient(90deg, rgba(236,207,127,1) 35%, rgba(236,237,5,1) 100%);">
+            <table class="table" >
+                <tr>
+                    <th>Product ID</th>
+                    <td>{{x.pno}}</td>
+                </tr>
+                <tr>
+                    <th>Product Name</th>
+                    <td>{{x.pname}}</td>
+                </tr>
+                <tr>
+                    <th>Product Price</th>
+                    <td>₹{{x.pcost}}</td>
+                </tr>
+
+            </table>
+            {% if user.role == 2 %}
+            <div class="row">
+                <a href="{% url 'pr' %}" class="btn btn-outline-info my-2 mx-auto">Back</a>
+            </div>
+            {% else %}
+            <div class="row">
+                <a href="{% url 'ap' %}" class="btn btn-outline-info my-2 mx-auto">Back</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+{% endblock %}
